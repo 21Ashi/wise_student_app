@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "870319285080",
+    "firebase_url": "https://wise-5f230-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "wise-5f230",
+    "storage_bucket": "wise-5f230.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870319285080:android:9f5644ff11d812a4023b2d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH4ClwpXSiLoR50Y9s5D1JqD0zKOSP0hU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870319285080:android:8e09cfef73891af1023b2d",
+        "android_client_info": {
+          "package_name": "com.example.wise_student_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH4ClwpXSiLoR50Y9s5D1JqD0zKOSP0hU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,29 @@
+class RoutesString {
+  static const String chat = '/chat';
+  static const String library = '/Library';
+  static const String mainPage = '/MainPage';
+  static const String news = '/News';
+  static const String forgetPassword = '/forgetpassword';
+  static const String notifications = '/notifications';
+  static const String resetPassword = '/resetpassword';
+  static const String entercode = '/entercode';
+  static const String navBar = '/navbar';
+  static const String newsDetails = '/personal_data';
+  static const String onboard = '/onboard';
+  static const String savedPosts = '/savedposts';
+  static const String draftPosts = '/draftposts';
+  static const String settings = '/settings';
+  static const String newpost = '/newpost';
+  static const String latestNews = '/latestnews';
+  static const String chatPage = '/chatpage';
+  static const String chatCall = '/chatcall';
+  static const String shoppingcart = '/shoppingcart';
+  static const String bookDetails = '/bookdetails';
+  static const String addbook = '/addbook';
+  static const String directreg = '/DirectReg';
+  static const String availableclasses = '/AvailableClasses';
+  static const String regDate = '/RegDate';
+  static const String paymenthour = '/PaymentHour';
+  static const String subjectList = '/SubjectsList';
+  static const String examsDate = '/ExamsDate';
+}
