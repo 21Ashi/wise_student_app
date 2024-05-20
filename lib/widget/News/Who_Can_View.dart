@@ -3,7 +3,7 @@ import 'package:wise_student_app/generated/l10n.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WhoCanView extends StatefulWidget {
-  const WhoCanView({Key? key}) : super(key: key);
+  const WhoCanView({super.key});
 
   @override
   State<WhoCanView> createState() => _WhoCanViewState();
@@ -94,10 +94,10 @@ class _PrivacySettingsSheet extends StatefulWidget {
   final Function(int, String) onValueChange;
 
   const _PrivacySettingsSheet({
-    Key? key,
+    super.key,
     required this.initialValue,
     required this.onValueChange,
-  }) : super(key: key);
+  });
 
   @override
   State<_PrivacySettingsSheet> createState() => _PrivacySettingsSheetState();

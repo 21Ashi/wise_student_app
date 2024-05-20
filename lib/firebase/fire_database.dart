@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -47,10 +49,10 @@ class FireData {
     }
   }
 
-  Future createGroup(String name, List members) async{
-    String gId= const Uuid().v1();
+  Future createGroup(String name, List members) async {
+    String gId = const Uuid().v1();
     members.add(myUid);
-    ChatGroup chatGroup= ChatGroup(
+    ChatGroup chatGroup = ChatGroup(
       id: gId,
       name: name,
       members: members,
@@ -59,12 +61,8 @@ class FireData {
       lastMessageTime: DateTime.now().millisecondsSinceEpoch.toString(),
       createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
     );
-    await firestore
-      .collection('groups')
-      .doc(gId)
-      .set(chatGroup.toJson());
+    await firestore.collection('groups').doc(gId).set(chatGroup.toJson());
   }
-
 
   Future sendMessage(String uid, String msg, String roomId,
       {String? type}) async {
@@ -116,12 +114,21 @@ class FireData {
           .delete();
     }
   }
-  
-  Future addBooks(String title, String author, String category,
-      String description, String pages, String language, String release, File image) async {
+
+  Future addBooks(
+      String title,
+      String author,
+      String category,
+      String description,
+      String pages,
+      String language,
+      String release,
+      File image) async {
     String bookId = const Uuid().v1();
     String imageUrl = await uploadImageToFirebaseStorage(image, bookId);
-    
+
+    // ignore: duplicate_ignore
+    // ignore: avoid_print
     print('xxx');
     print(imageUrl);
 
@@ -134,7 +141,7 @@ class FireData {
       'pages': pages,
       'language': language,
       'release': release,
-      'image':imageUrl
+      'image': imageUrl
     });
   }
 
@@ -160,9 +167,9 @@ class FireData {
     });
   }
 
-  Future createStudentCourseTable(String name, List members) async{
-    String cId= const Uuid().v1();
-    StudentTable chatGroup= StudentTable(
+  Future createStudentCourseTable(String name, List members) async {
+    String cId = const Uuid().v1();
+    StudentTable chatGroup = StudentTable(
       cId: cId,
       stdId: myUid,
       courseName: '',
@@ -173,9 +180,9 @@ class FireData {
       creditHours: '',
     );
     await firestore
-      .collection('Student Schedual')
-      .doc(cId)
-      .set(chatGroup.toJson());
+        .collection('Student Schedual')
+        .doc(cId)
+        .set(chatGroup.toJson());
   }
 
   Future uploadImageToFirebaseStorage(File image, String postId) async {

@@ -6,7 +6,7 @@ import 'package:wise_student_app/widget/StudentWidgets/Table/semester_exams_tabl
 import 'package:wise_student_app/widget/StudentWidgets/drop_list_marks_report.dart';
 
 class DroplistExams extends StatefulWidget {
-  const DroplistExams({Key? key}) : super(key: key);
+  const DroplistExams({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

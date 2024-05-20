@@ -11,8 +11,7 @@ import 'package:flutter/material.dart';
 class NewPostTextField2 extends StatefulWidget {
   final String label;
   final Widget? suffix;
-  NewPostTextField2({Key? key, required this.label, required this.suffix})
-      : super(key: key);
+  NewPostTextField2({super.key, required this.label, required this.suffix});
   // ignore: unused_field
   File? _selectImage;
 

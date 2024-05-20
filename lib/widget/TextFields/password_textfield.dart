@@ -5,7 +5,7 @@ void main() {
 }
 
 class Password extends StatelessWidget {
-  const Password({Key? key}) : super(key: key);
+  const Password({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +31,11 @@ class CustomPasswordField extends StatefulWidget {
   final TextEditingController controller;
 
   const CustomPasswordField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     required this.hintText,
-  }) : super(key: key);
+  });
 
   @override
   // ignore: library_private_types_in_public_api

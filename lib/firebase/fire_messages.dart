@@ -9,7 +9,8 @@ class FirebaseMessagesApi {
 
     final fCMToken = await _filrebaseMessaging.getToken();
 
-    print("Token : " + fCMToken.toString());
+    // ignore: avoid_print
+    print("Token : $fCMToken");
 
     initPushNotification();
   }

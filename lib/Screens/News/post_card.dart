@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wise_student_app/Screens/News/news_Details.dart';
+import 'package:wise_student_app/Screens/News/news_details.dart';
 
 Widget postCard(
   BuildContext context, {

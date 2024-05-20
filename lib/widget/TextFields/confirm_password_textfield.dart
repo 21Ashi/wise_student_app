@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfirmPassowrdTextField extends StatefulWidget {
-  const ConfirmPassowrdTextField({Key? key}) : super(key: key);
+  const ConfirmPassowrdTextField({super.key});
 
   @override
   State<ConfirmPassowrdTextField> createState() => _NewPasswordTextFieldState();
@@ -11,27 +11,25 @@ class _NewPasswordTextFieldState extends State<ConfirmPassowrdTextField> {
   final TextEditingController _passwordValidation = TextEditingController();
 
   bool _isvisible = false;
-   bool _isPasswordSixCharacters = false;
-    bool _isPasswordOneNumber = false;
-    bool _isPasswordOneSpecial = false;
+  bool _isPasswordSixCharacters = false;
+  bool _isPasswordOneNumber = false;
+  bool _isPasswordOneSpecial = false;
   onpasswordchange(String password) {
     final numericRegex = RegExp(r'[0-9]');
     final letterRegex = RegExp(r'[!@#\$&*~]');
     setState(() {
       _isPasswordSixCharacters = false;
-      if(password.length >= 6) {
+      if (password.length >= 6) {
         _isPasswordSixCharacters = true;
       }
       _isPasswordOneNumber = false;
-      if(numericRegex.hasMatch(password)) {
+      if (numericRegex.hasMatch(password)) {
         _isPasswordOneNumber = true;
       }
       _isPasswordOneSpecial = false;
-      if(letterRegex.hasMatch(password)){
+      if (letterRegex.hasMatch(password)) {
         _isPasswordOneSpecial = true;
       }
-      
-      
     });
   }
 
@@ -79,10 +77,13 @@ class _NewPasswordTextFieldState extends State<ConfirmPassowrdTextField> {
               duration: const Duration(milliseconds: 500),
               width: 15,
               height: 15,
-              
               decoration: BoxDecoration(
-                  color: _isPasswordSixCharacters ? Colors.green : Colors.transparent,
-                  border: _isPasswordSixCharacters ? Border.all(color: Colors.transparent) : Border.all(),
+                  color: _isPasswordSixCharacters
+                      ? Colors.green
+                      : Colors.transparent,
+                  border: _isPasswordSixCharacters
+                      ? Border.all(color: Colors.transparent)
+                      : Border.all(),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(50),
                   )),
@@ -103,10 +104,12 @@ class _NewPasswordTextFieldState extends State<ConfirmPassowrdTextField> {
               duration: const Duration(milliseconds: 500),
               width: 15,
               height: 15,
-              
               decoration: BoxDecoration(
-                  color: _isPasswordOneNumber ? Colors.green : Colors.transparent,
-                  border: _isPasswordOneNumber ? Border.all(color: Colors.transparent) : Border.all(),
+                  color:
+                      _isPasswordOneNumber ? Colors.green : Colors.transparent,
+                  border: _isPasswordOneNumber
+                      ? Border.all(color: Colors.transparent)
+                      : Border.all(),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(50),
                   )),
@@ -127,10 +130,12 @@ class _NewPasswordTextFieldState extends State<ConfirmPassowrdTextField> {
               duration: const Duration(milliseconds: 500),
               width: 15,
               height: 15,
-              
               decoration: BoxDecoration(
-                  color: _isPasswordOneSpecial ? Colors.green : Colors.transparent,
-                  border: _isPasswordOneSpecial ? Border.all(color: Colors.transparent) : Border.all(),
+                  color:
+                      _isPasswordOneSpecial ? Colors.green : Colors.transparent,
+                  border: _isPasswordOneSpecial
+                      ? Border.all(color: Colors.transparent)
+                      : Border.all(),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(50),
                   )),

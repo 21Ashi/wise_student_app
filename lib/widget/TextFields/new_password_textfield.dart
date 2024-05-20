@@ -4,7 +4,7 @@ import 'package:wise_student_app/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NewPasswordTextField extends StatefulWidget {
-  const NewPasswordTextField({Key? key}) : super(key: key);
+  const NewPasswordTextField({super.key});
 
   @override
   State<NewPasswordTextField> createState() => _NewPasswordTextFieldState();

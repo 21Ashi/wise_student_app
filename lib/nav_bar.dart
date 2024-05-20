@@ -4,7 +4,6 @@ import 'package:wise_student_app/Screens/Library/library_main.dart';
 import 'package:wise_student_app/Screens/News/news_main.dart';
 import 'package:wise_student_app/Screens/Profile/student_profile_screen.dart';
 import 'package:wise_student_app/generated/l10n.dart';
-import 'package:wise_student_app/models/user_model.dart';
 import 'package:wise_student_app/provider/provider_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +41,6 @@ class _InstagramNavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
-    Std? me = Provider.of<ThemeProvider>(context).me;
     return Scaffold(
       // me == null
       // ?

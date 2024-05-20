@@ -6,7 +6,7 @@ import 'package:wise_student_app/widget/StudentWidgets/drop_list_selectdays.dart
 import 'package:wise_student_app/widget/StudentWidgets/drop_list_selectperiod.dart';
 
 class Opennewsection extends StatefulWidget {
-  const Opennewsection({Key? key}) : super(key: key);
+  const Opennewsection({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

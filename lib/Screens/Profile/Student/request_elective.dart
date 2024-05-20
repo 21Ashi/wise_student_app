@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 
 class RequestElective extends StatefulWidget {
-  const RequestElective({Key? key}) : super(key: key);
+  const RequestElective({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

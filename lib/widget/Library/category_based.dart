@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:wise_student_app/Screens/Library/book_details.dart';
 
-Widget categoryBooks(
-  BuildContext context,{
-    required imagePath,
+Widget categoryBooks(BuildContext context,
+    {required imagePath,
     required String category,
     required String title,
     required String author,
-    required String pages, 
-    required String language, 
-    required String release, 
-    required String description
-  }) {
+    required String pages,
+    required String language,
+    required String release,
+    required String description}) {
   return GestureDetector(
     onTap: () {
       Get.to(() => BookDetails(
-          category: category,
-          title: title,
-          imageAssetPath: imagePath,
-          author: author,
-          pages: pages,
-          language: language,
-          release: release,
-          description: description,
-      ));
+            category: category,
+            title: title,
+            imageAssetPath: imagePath,
+            author: author,
+            pages: pages,
+            language: language,
+            release: release,
+            description: description,
+          ));
     },
     child: Padding(
-      padding: const EdgeInsets.only(bottom:5),
+      padding: const EdgeInsets.only(bottom: 5),
       child: Row(
         children: [
           Container(
@@ -59,8 +56,8 @@ Widget categoryBooks(
                         fontSize: 10)),
                 const SizedBox(height: 5),
                 Text(title,
-                    style:
-                        const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 12, fontWeight: FontWeight.bold),
                     softWrap: true,
                     overflow: TextOverflow.clip),
                 const SizedBox(height: 5),

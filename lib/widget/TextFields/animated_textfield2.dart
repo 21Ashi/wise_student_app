@@ -9,8 +9,7 @@ class AnimatedTextField2 extends StatefulWidget {
   final String label;
   final Widget? suffix;
   const AnimatedTextField2(
-      {Key? key, required this.label, required this.suffix})
-      : super(key: key);
+      {super.key, required this.label, required this.suffix});
 
   @override
   State<AnimatedTextField2> createState() => _AnimatedTextFieldState2();

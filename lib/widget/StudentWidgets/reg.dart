@@ -8,12 +8,12 @@ class RegistrationWidget extends StatelessWidget {
   final IconData icon2;
 
   const RegistrationWidget({
-    Key? key,
+    super.key,
     required this.icon,
     required this.text,
     required this.navigateToClass,
     required this.icon2,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,10 @@ class CustomRowPay extends StatelessWidget {
   final String value;
 
   const CustomRowPay({
-    Key? key,
+    super.key,
     required this.title,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

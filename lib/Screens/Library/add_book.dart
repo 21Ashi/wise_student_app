@@ -68,87 +68,107 @@ class _YourAddContentState extends State<YourAddContent> {
                 Text(
                   S.of(context).BookTitle,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 16
-                  ),
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 16),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Container(
                   height: 50,
                   width: 400,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.background,),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                  ),
                   child: TextField(
                     controller: _booktitle,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.library_books,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      hintText: S.of(context).BookTitle,
-                      hintStyle:TextStyle(color: Colors.grey[700], fontSize: 14),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Theme.of(context).colorScheme.primary,),
-                        borderRadius: BorderRadius.circular(16)
-                      )
-                    ),
+                        prefixIcon: Icon(
+                          Icons.library_books,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        hintText: S.of(context).BookTitle,
+                        hintStyle:
+                            TextStyle(color: Colors.grey[700], fontSize: 14),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            borderRadius: BorderRadius.circular(16))),
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   S.of(context).Author,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 16),
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 16),
                 ),
                 const SizedBox(height: 10),
                 Container(
                   height: 50,
                   width: 400,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.background,),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                  ),
                   child: TextField(
                     controller: _author,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      hintText: S.of(context).Author,
-                      hintStyle:TextStyle(color: Colors.grey[700], fontSize: 14),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Theme.of(context).colorScheme.primary,),
-                        borderRadius: BorderRadius.circular(16)
-                      )
-                    ),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        hintText: S.of(context).Author,
+                        hintStyle:
+                            TextStyle(color: Colors.grey[700], fontSize: 14),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            borderRadius: BorderRadius.circular(16))),
                   ),
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Text(
                   S.of(context).Category,
-                  style: TextStyle(color: Theme.of(context).colorScheme.primary,fontSize: 16),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 16),
                 ),
                 const SizedBox(height: 10),
                 Container(
                   height: 50,
                   width: 400,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.background,),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                  ),
                   child: TextField(
                     controller: _category,
                     decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.library_books,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    hintText: S.of(context).Category,
-                    hintStyle:TextStyle(color: Colors.grey[700], fontSize: 14),
-                    border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Theme.of(context).colorScheme.primary,),
-                    borderRadius: BorderRadius.circular(16))),
+                        prefixIcon: Icon(
+                          Icons.library_books,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        hintText: S.of(context).Category,
+                        hintStyle:
+                            TextStyle(color: Colors.grey[700], fontSize: 14),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            borderRadius: BorderRadius.circular(16))),
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Text(
                   S.of(context).NewPostDescription,
-                  style: TextStyle(color: Theme.of(context).colorScheme.primary,fontSize: 16),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 16),
                 ),
                 const SizedBox(height: 5),
                 Container(
@@ -156,7 +176,8 @@ class _YourAddContentState extends State<YourAddContent> {
                   width: 400,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.background,
-                    border: Border.all(color: Theme.of(context).colorScheme.primary),
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.primary),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Padding(
@@ -164,19 +185,20 @@ class _YourAddContentState extends State<YourAddContent> {
                     child: TextField(
                       controller: _description,
                       decoration: InputDecoration(
-                        hintText: S.of(context).TypeHere,
-                        hintStyle:TextStyle(color: Colors.grey[700], fontSize: 14),
-                        border: InputBorder.none
-                      ),
+                          hintText: S.of(context).TypeHere,
+                          hintStyle:
+                              TextStyle(color: Colors.grey[700], fontSize: 14),
+                          border: InputBorder.none),
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.black)
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.black)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -185,7 +207,9 @@ class _YourAddContentState extends State<YourAddContent> {
                           children: [
                             Text(
                               S.of(context).BookPage,
-                              style: TextStyle(color: Theme.of(context).colorScheme.primary,fontSize: 14),
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontSize: 14),
                             ),
                             SizedBox(
                               height: 40,
@@ -206,9 +230,8 @@ class _YourAddContentState extends State<YourAddContent> {
                             Text(
                               S.of(context).BookLanguage,
                               style: TextStyle(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontSize: 14
-                              ),
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontSize: 14),
                             ),
                             SizedBox(
                               height: 40,
@@ -250,42 +273,45 @@ class _YourAddContentState extends State<YourAddContent> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10,),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.black)
-                  ),
-                  padding: const EdgeInsets.all(5),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Book cover",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 14,
-                        ),
-                      ),
-                      // MyGallery(
-                      //   onImageUploaded: (String? image_path) {
-                      //     if (image_path != null) {
-                      //       setState(() {
-                      //         _image = File(image_path);
-                      //       });
-                      //     }
-                      //   },
-                      // ),
-                    ],
-                  )
+                const SizedBox(
+                  height: 10,
                 ),
-                const SizedBox(height: 10,),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.black)),
+                    padding: const EdgeInsets.all(5),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Book cover",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 14,
+                          ),
+                        ),
+                        // MyGallery(
+                        //   onImageUploaded: (String? image_path) {
+                        //     if (image_path != null) {
+                        //       setState(() {
+                        //         _image = File(image_path);
+                        //       });
+                        //     }
+                        //   },
+                        // ),
+                      ],
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InkWell(
                       onTap: () async {
                         if (_image != null) {
-                          FireData().addBooks(
+                          FireData()
+                              .addBooks(
                             _booktitle.text,
                             _author.text,
                             _category.text,
@@ -294,7 +320,8 @@ class _YourAddContentState extends State<YourAddContent> {
                             _language.text,
                             _release.text,
                             _image!,
-                          ).then((value){
+                          )
+                              .then((value) {
                             setState(() {
                               _booktitle.text = " ";
                               _author.text = " ";
@@ -306,10 +333,10 @@ class _YourAddContentState extends State<YourAddContent> {
                               _image = null;
                             });
                             Navigator.of(context).pop;
-                          });;
-                        }else {
+                          });
+                        } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Failed')));
+                              const SnackBar(content: Text('Failed')));
                         }
                       },
                       child: Container(
@@ -334,7 +361,9 @@ class _YourAddContentState extends State<YourAddContent> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(() => const NavBar(initialIndex: 1,));
+                        Get.to(() => const NavBar(
+                              initialIndex: 1,
+                            ));
                       },
                       child: Container(
                         height: 50,
@@ -357,7 +386,7 @@ class _YourAddContentState extends State<YourAddContent> {
                       ),
                     ),
                   ],
-                ),    
+                ),
               ],
             ),
           ),
@@ -365,9 +394,11 @@ class _YourAddContentState extends State<YourAddContent> {
       ),
     );
   }
+
   Future<void> pickImageFromGallery() async {
     final returnImage =
         await ImagePicker().pickImage(source: ImageSource.camera);
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("${returnImage?.path}")));
     if (returnImage == null) return;

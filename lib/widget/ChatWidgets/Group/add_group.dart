@@ -3,8 +3,8 @@ import 'package:wise_student_app/generated/l10n.dart';
 
 class AddGroup extends StatelessWidget {
   const AddGroup({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class AddGroup extends StatelessWidget {
 }
 
 class ImageSelectionBottomSheet extends StatefulWidget {
-  const ImageSelectionBottomSheet({Key? key}) : super(key: key);
+  const ImageSelectionBottomSheet({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

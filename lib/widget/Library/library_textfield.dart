@@ -5,8 +5,7 @@ class LibraryTextField extends StatefulWidget {
   final Widget? suffix;
   final ValueChanged<String>? onChanged; // Add onChanged parameter
 
-  const LibraryTextField({Key? key, required this.suffix, this.onChanged}) // Update constructor
-      : super(key: key);
+  const LibraryTextField({super.key, required this.suffix, this.onChanged});
 
   @override
   State<LibraryTextField> createState() => _AnimatedTextFieldState2();
@@ -32,10 +31,12 @@ class _AnimatedTextFieldState2 extends State<LibraryTextField>
         focusNode: focusNode,
         controller: _textEditingController,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search, color: Theme.of(context).colorScheme.primary),
+          prefixIcon:
+              Icon(Icons.search, color: Theme.of(context).colorScheme.primary),
           hintText: S.of(context).Search,
           hintStyle: const TextStyle(fontSize: 15),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           border: InputBorder.none,
         ),
       ),

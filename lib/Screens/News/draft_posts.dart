@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wise_student_app/Screens/News/news_details.dart';
 import 'package:wise_student_app/generated/l10n.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DraftPosts extends StatefulWidget {

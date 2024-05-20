@@ -7,8 +7,7 @@ class TextTab extends StatefulWidget {
   final Function(int) onTabSelected;
 
   const TextTab(
-      {Key? key, required this.tabTitles, required this.onTabSelected})
-      : super(key: key);
+      {super.key, required this.tabTitles, required this.onTabSelected});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -44,11 +43,10 @@ class TabItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const TabItem(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.isSelected,
-      required this.onTap})
-      : super(key: key);
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {

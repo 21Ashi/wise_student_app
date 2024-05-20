@@ -83,7 +83,7 @@ class Levelexams extends StatelessWidget {
 class CustomTableCell extends StatelessWidget {
   final String text;
 
-  const CustomTableCell({Key? key, required this.text}) : super(key: key);
+  const CustomTableCell({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

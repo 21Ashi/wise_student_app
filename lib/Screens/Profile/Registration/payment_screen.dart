@@ -5,7 +5,7 @@ import 'package:wise_student_app/generated/l10n.dart';
 import 'package:wise_student_app/widget/StudentWidgets/reg.dart';
 
 class PaymentHourSelection extends StatefulWidget {
-  const PaymentHourSelection({Key? key}) : super(key: key);
+  const PaymentHourSelection({super.key});
 
   @override
   State<PaymentHourSelection> createState() => _PaymentHourSelectionState();

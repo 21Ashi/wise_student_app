@@ -4,7 +4,7 @@ import 'package:wise_student_app/Screens/Profile/Student/open_new_selection.dart
 import 'package:wise_student_app/Screens/Profile/Student/request_elective.dart';
 
 class DroplistElectronicRequest extends StatefulWidget {
-  const DroplistElectronicRequest({Key? key}) : super(key: key);
+  const DroplistElectronicRequest({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

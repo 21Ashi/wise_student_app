@@ -13,7 +13,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:restart_app/restart_app.dart';
 
 class SplashScreen2 extends StatefulWidget {
-  const SplashScreen2({Key? key}) : super(key: key);
+  const SplashScreen2({super.key});
 
   @override
   State<SplashScreen2> createState() => _SplashScreenState();

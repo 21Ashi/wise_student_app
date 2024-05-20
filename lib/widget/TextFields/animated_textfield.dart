@@ -6,8 +6,8 @@ import 'package:wise_student_app/widget/TextFields/custom_animate_border.dart';
 class AnimatedTextField extends StatefulWidget {
   final String label;
   final Widget? suffix;
-  const AnimatedTextField({Key? key, required this.label, required this.suffix})
-      : super(key: key);
+  const AnimatedTextField(
+      {super.key, required this.label, required this.suffix});
 
   @override
   State<AnimatedTextField> createState() => _AnimatedTextFieldState();

@@ -21,11 +21,13 @@ class SearchButton extends StatelessWidget {
         width: 40,
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
-          color: Colors.orange,
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(color: Colors.white)
+            color: Colors.orange,
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: Colors.white)),
+        child: const Icon(
+          Icons.search,
+          color: Colors.white,
         ),
-        child: const Icon(Icons.search, color: Colors.white,),
       ),
     );
   }
@@ -49,7 +51,8 @@ class _SearchChatState extends State<SearchChat> {
   }
 
   void getData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('students').get();
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('students').get();
     setState(() {
       data.addAll(querySnapshot.docs);
     });
@@ -76,20 +79,21 @@ class _SearchChatState extends State<SearchChat> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
+                    padding:
+                        const EdgeInsets.only(top: 50, left: 10, right: 10),
                     child: Row(
                       children: [
                         InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Icon(Icons.arrow_back_ios_new)
-                        )
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Icon(Icons.arrow_back_ios_new))
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+                    padding: const EdgeInsets.only(
+                        top: 20, left: 10, right: 10, bottom: 10),
                     child: LibraryTextField(
                       suffix: null,
                       onChanged: (value) {
@@ -102,49 +106,56 @@ class _SearchChatState extends State<SearchChat> {
                   Container(
                     height: 672.9,
                     decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20)
-                      )
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20))),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SingleChildScrollView(
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('students')
+                                  .snapshots(),
+                              builder: (context, snapshots) {
+                                if (snapshots.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else {
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: snapshots.data!.docs.length,
+                                    itemBuilder: (context, index) {
+                                      var data = snapshots.data!.docs[index]
+                                          .data() as Map<String, dynamic>;
+                                      if (searchText.isEmpty ||
+                                          data['fname']
+                                              .toString()
+                                              .toLowerCase()
+                                              .contains(
+                                                  searchText.toLowerCase()) ||
+                                          data['std_email']
+                                              .toString()
+                                              .toLowerCase()
+                                              .contains(
+                                                  searchText.toLowerCase())) {
+                                        return searchChatCard(
+                                          context: context,
+                                          fname: data['fname'],
+                                          std_email: data['std_email'],
+                                        );
+                                      }
+                                      return const SizedBox.shrink();
+                                    },
+                                  );
+                                }
+                              }),
+                        ),
+                      ],
                     ),
-                    child: SingleChildScrollView(
-                      child: StreamBuilder<QuerySnapshot>(
-                        stream: FirebaseFirestore.instance
-                          .collection('students')
-                          .snapshots(),
-                        builder: (context, snapshots) {
-                          if (snapshots.connectionState == ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
-                          } else {
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: snapshots.data!.docs.length,
-                              itemBuilder: (context, index) {
-                              var data = snapshots.data!.docs[index].data() as Map<String, dynamic>;
-                                if (searchText.isEmpty ||
-                                  data['fname']
-                                    .toString()
-                                    .toLowerCase()
-                                    .contains(searchText.toLowerCase()) ||
-                                  data['std_email']
-                                    .toString()
-                                    .toLowerCase()
-                                    .contains(searchText.toLowerCase())
-                                  ) {
-                                    return searchChatCard(
-                                      context: context,
-                                      fname:data['fname'],
-                                      std_email: data['std_email'],
-                                    );
-                                  }
-                                  return const SizedBox.shrink();
-                                },
-                              );
-                            }
-                          }),
-                    ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -155,23 +166,20 @@ class _SearchChatState extends State<SearchChat> {
   }
 }
 
-
-Widget searchChatCard({
-  required BuildContext context,
-  required String fname,
-  required String std_email
-}) {
+Widget searchChatCard(
+    {required BuildContext context,
+    required String fname,
+    required String std_email}) {
   return GestureDetector(
     onTap: () {
       Get.to(() => const UserListItem());
     },
     child: Card(
       child: ListTile(
-        leading:Image.asset('assets/user1.png'),
+        leading: Image.asset('assets/user1.png'),
         title: Text(fname),
         subtitle: Text(std_email),
       ),
     ),
   );
 }
-

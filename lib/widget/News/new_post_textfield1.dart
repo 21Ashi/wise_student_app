@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 class NewPostTextField extends StatefulWidget {
   final String label;
   final Widget? suffix;
-  const NewPostTextField({Key? key, required this.label, required this.suffix})
-      : super(key: key);
+  const NewPostTextField(
+      {super.key, required this.label, required this.suffix});
 
   @override
   State<NewPostTextField> createState() => _AnimatedTextFieldState2();

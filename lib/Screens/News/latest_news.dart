@@ -27,7 +27,6 @@ class _NewsState extends State<LatestNews> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }

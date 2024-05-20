@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Entercode extends StatelessWidget {
-  const Entercode({Key? key}) : super(key: key);
+  const Entercode({super.key});
 
   // Function to launch URL
   void launchUrl(Uri url) async {

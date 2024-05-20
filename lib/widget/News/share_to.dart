@@ -3,7 +3,7 @@ import 'package:wise_student_app/generated/l10n.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareToButton extends StatelessWidget {
-  const ShareToButton({Key? key}) : super(key: key);
+  const ShareToButton({super.key});
 
   @override
   Widget build(BuildContext context) {

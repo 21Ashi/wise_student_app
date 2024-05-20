@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LanguageDropdown extends StatefulWidget {
   final Function(String) onChanged;
 
-  const LanguageDropdown({Key? key, required this.onChanged}) : super(key: key);
+  const LanguageDropdown({super.key, required this.onChanged});
 
   @override
   _LanguageDropdownState createState() => _LanguageDropdownState();

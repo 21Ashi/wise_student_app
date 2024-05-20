@@ -4,7 +4,7 @@ import 'package:wise_student_app/widget/StudentWidgets/Table/AvaliableClasses/av
 import 'package:wise_student_app/widget/StudentWidgets/name_id_container.dart';
 
 class DroplistSemester extends StatefulWidget {
-  const DroplistSemester({Key? key}) : super(key: key);
+  const DroplistSemester({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

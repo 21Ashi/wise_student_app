@@ -8,8 +8,8 @@ import 'package:flutter/services.dart';
 class MessageCard extends StatefulWidget {
   final String roomId;
   final Message messageItem;
-  const MessageCard({Key? key, required this.roomId, required this.messageItem})
-      : super(key: key);
+  const MessageCard(
+      {super.key, required this.roomId, required this.messageItem});
 
   @override
   State<MessageCard> createState() => _MessageCardState();
@@ -146,11 +146,11 @@ class CardMessage extends StatelessWidget {
   final bool selected;
 
   const CardMessage({
-    Key? key,
+    super.key,
     required this.messageItem,
     required this.index,
     required this.selected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

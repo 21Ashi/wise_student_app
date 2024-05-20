@@ -46,6 +46,7 @@ Future<void> main() async {
   await FirebaseMessagesApi().initNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     // Handle incoming FCM message
+    // ignore: avoid_print
     print("FCM Message Received: ${message.notification?.title}");
     // Display notification
     displayNotification(message);

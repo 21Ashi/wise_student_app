@@ -4,8 +4,7 @@ import 'package:wise_student_app/generated/l10n.dart';
 
 class DroplistSelectPeriod extends StatefulWidget {
   const DroplistSelectPeriod(
-      {Key? key, required Null Function(dynamic selected) onChanged})
-      : super(key: key);
+      {super.key, required Null Function(dynamic selected) onChanged});
 
   @override
   // ignore: library_private_types_in_public_api

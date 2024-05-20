@@ -7,12 +7,12 @@ class NotiUser extends StatelessWidget {
   final String timestamp;
 
   const NotiUser({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.senderName,
     required this.messageText,
     required this.timestamp,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +37,15 @@ class NotiUser extends StatelessWidget {
                   Text(
                     messageText,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,fontSize: 10
-                    ),
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 10),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     timestamp,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,fontSize: 10
-                    ),
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 10),
                   ),
                 ],
               ),
