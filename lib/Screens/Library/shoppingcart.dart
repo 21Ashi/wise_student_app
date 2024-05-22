@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 
 class ShoppingCart extends StatelessWidget {
@@ -26,9 +24,34 @@ class ShoppingCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shoppingCartController = Get.put(ShoppingCartController());
+    final shoppingCartController = Get.find<ShoppingCartController>();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(S.of(context).Shoppingcart),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete_sweep_rounded),
+            onPressed: () {
+              final removedItems =
+                  List<Map<String, dynamic>>.from(shoppingCartController.books);
+              shoppingCartController.clearCart();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('All items cleared'),
+                  action: SnackBarAction(
+                    label: 'Undo',
+                    onPressed: () {
+                      if (removedItems.isNotEmpty) {
+                        shoppingCartController.addMultipleToCart(removedItems);
+                      }
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: YourCartContent(
         title: title,
         imageAssetPath: imageAssetPath,
@@ -37,14 +60,10 @@ class ShoppingCart extends StatelessWidget {
         language: language,
         release: release,
         description: description,
-        onAddToCart: () {
-          shoppingCartController.addToCart(title);
-        },
       ),
     );
   }
 }
-
 
 class YourCartContent extends StatefulWidget {
   final String title;
@@ -54,120 +73,135 @@ class YourCartContent extends StatefulWidget {
   final String language;
   final String description;
   final String release;
-  final VoidCallback onAddToCart;
-  const YourCartContent({super.key, required this.title, required this.imageAssetPath, required this.author, required this.pages, required this.language, required this.release, required this.description, required this.onAddToCart,});
+
+  const YourCartContent({
+    super.key,
+    required this.title,
+    required this.imageAssetPath,
+    required this.author,
+    required this.pages,
+    required this.language,
+    required this.release,
+    required this.description,
+  });
 
   @override
   State<YourCartContent> createState() => _YourCartContentState();
 }
 
-
 class _YourCartContentState extends State<YourCartContent> {
+  // Temporary storage for the last removed item
+  Map<String, dynamic>? _lastRemovedItem;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Column(
+    final shoppingCartController = Get.find<ShoppingCartController>();
+    final cartItems = shoppingCartController.books;
+
+    return Obx(
+      () {
+        // Check if the shopping cart is empty
+        if (cartItems.isEmpty) {
+          return const Center(
+            child: Text('Your shopping cart is empty.'),
+          );
+        }
+
+        // If the shopping cart is not empty, display the cart items
+        return Column(
           children: [
-            Row(
-              children: [
-                const SizedBox(width: 30),
-                Text(
-                  S.of(context).Shoppingcart,
-                  style: GoogleFonts.hammersmithOne(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10,),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: cartItems.length,
+                itemBuilder: (context, index) {
+                  final book = cartItems[index];
+                  return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Slidable(
-                      endActionPane: ActionPane(
-                        motion: const StretchMotion(),
-                        children: [
-                          SlidableAction(
-                            onPressed: (context) => _onDeletePressed(),
-                            backgroundColor: Colors.red,
-                            icon: Icons.delete,
+                    child: Card(
+                      child: ListTile(
+                        leading: Image.asset(book['imageAssetPath']),
+                        title: Text(
+                          book['title'],
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
                           ),
-                        ],
-                      ),
-                      child: Card(
-                        child: ListTile(
-                          leading: Image.asset(widget.imageAssetPath),
-                          title: Text(
-                            widget.title,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                        ),
+                        subtitle: Text(
+                          book['author'],
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
                           ),
-                          subtitle: Text(
-                            widget.author,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                            ),
-                          ),
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () => _onDeletePressed(book),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
-            )
-          ],
-        ),
-        const SizedBox(height: 50),
-        Container(
-          height: 50,
-          width: 280,
-          decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                  offset: Offset(0, 3), blurRadius: 4, color: Colors.black38)
-            ],
-            color: Colors.orange[700],
-            gradient: const LinearGradient(
-                colors: [Color(0xffF9AD70), Color(0xffFF5717)]),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(
-            child: Text(
-              S.of(context).ConfirmButton,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.background, fontSize: 16),
             ),
-          ),
-        )
-      ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 50,
+                width: 280,
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(0, 3),
+                      blurRadius: 4,
+                      color: Colors.black38,
+                    ),
+                  ],
+                  color: Colors.orange[700],
+                  gradient: const LinearGradient(
+                    colors: [Color(0xffF9AD70), Color(0xffFF5717)],
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Text(
+                    S.of(context).ConfirmButton,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.background,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.1,
+            ), // Adding some bottom padding
+          ],
+        );
+      },
     );
   }
-  bool isUserVisible = true;
 
-  void _onDeletePressed() {
-    setState(() {
-      isUserVisible = false;
-      _showUndoSnackbar();
-    });
-  }
+  void _onDeletePressed(Map<String, dynamic> book) {
+    // Remove the item from the shopping cart
+    ShoppingCartController.instance.removeFromCart(book['title']);
+    // Store the removed item temporarily
+    _lastRemovedItem = book;
 
-  void _showUndoSnackbar() {
+    // Show the undo snackbar
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Chat Deleted'),
+        content: Text('Deleted ${book['title']}'),
         action: SnackBarAction(
           label: 'Undo',
           onPressed: () {
-            setState(() {
-              isUserVisible = true;
-            });
+            if (_lastRemovedItem != null) {
+              // Re-add the last removed item to the cart
+              ShoppingCartController.instance.addToCart(_lastRemovedItem!);
+              _lastRemovedItem = null; // Clear the last removed item
+            }
           },
         ),
       ),
@@ -175,16 +209,30 @@ class _YourCartContentState extends State<YourCartContent> {
   }
 }
 
-
 class ShoppingCartController extends GetxController {
-  final RxList<String> books = <String>[].obs;
+  static final ShoppingCartController instance =
+      ShoppingCartController._internal();
+  factory ShoppingCartController() => instance;
+  ShoppingCartController._internal();
 
-  void addToCart(String bookTitle) {
-    books.add(bookTitle);
+  final RxList<Map<String, dynamic>> books = <Map<String, dynamic>>[].obs;
+
+  void addToCart(Map<String, dynamic> bookDetails) {
+    debugPrint('Adding ${bookDetails['title']} to cart');
+    books.add(bookDetails);
+    debugPrint('Cart items: $books');
+  }
+
+  void addMultipleToCart(List<Map<String, dynamic>> bookDetails) {
+    books.addAll(bookDetails);
+    debugPrint('Cart items: $books');
+  }
+
+  void clearCart() {
+    books.clear();
   }
 
   void removeFromCart(String bookTitle) {
-    books.remove(bookTitle);
+    books.removeWhere((book) => book['title'] == bookTitle);
   }
 }
-

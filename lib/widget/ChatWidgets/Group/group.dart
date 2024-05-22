@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wise_student_app/firebase/fire_database.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 import 'package:wise_student_app/models/user_model.dart';
+import 'package:wise_student_app/widget/ChatWidgets/Group/add_group.dart';
 
 class GroupButton extends StatelessWidget {
   const GroupButton({super.key});
@@ -13,7 +14,7 @@ class GroupButton extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GroupChat()),
+          MaterialPageRoute(builder: (context) => const AddGroup()),
         );
       },
       child: Container(

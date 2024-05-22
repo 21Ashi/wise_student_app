@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:alphabet_scroll_view/alphabet_scroll_view.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 import 'package:wise_student_app/provider/provider_theme.dart';
+import 'package:wise_student_app/widget/ChatWidgets/Group/add_group.dart';
 import 'package:wise_student_app/widget/ChatWidgets/Group/group_list_item.dart';
 import 'package:wise_student_app/widget/ChatWidgets/Chat/chat_text_tab.dart';
 import 'package:wise_student_app/widget/ChatWidgets/floating_bottom.dart';
@@ -69,7 +70,7 @@ class _ChatprofileState extends State<Chatprofile>
                 width: MediaQuery.sizeOf(context).width * 0.24,
               ),
               const SearchButton(),
-              const GroupButton(),
+              const AddGroup(),
             ],
           ),
         ),

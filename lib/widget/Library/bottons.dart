@@ -12,19 +12,20 @@ class ShoppingCartButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Get.to(() => const ShoppingCart(
-          title: '',
-          imageAssetPath: '',
-          author: '',
-          pages: '',
-          language: '',
-          release: '',
-          description: '',
-        ));
+              title: '',
+              imageAssetPath: '',
+              author: '',
+              pages: '',
+              language: '',
+              release: '',
+              description: '',
+            ));
       },
       style: ElevatedButton.styleFrom(
-      shape: const CircleBorder(),
-      backgroundColor: const Color.fromARGB(255, 21, 169, 255),
-      side: BorderSide(color:Theme.of(context).colorScheme.background),),
+        shape: const CircleBorder(),
+        backgroundColor: const Color.fromARGB(255, 21, 169, 255),
+        side: BorderSide(color: Theme.of(context).colorScheme.background),
+      ),
       child: Icon(
         Icons.shopping_cart_outlined,
         color: Theme.of(context).colorScheme.background,
@@ -44,9 +45,10 @@ class AddBookBotton extends StatelessWidget {
         Get.to(() => const AddBook());
       },
       style: ElevatedButton.styleFrom(
-      shape: const CircleBorder(),
-      backgroundColor: const Color(0xffFF7315),
-      side: BorderSide(color:Theme.of(context).colorScheme.background),),
+        shape: const CircleBorder(),
+        backgroundColor: const Color(0xffFF7315),
+        side: BorderSide(color: Theme.of(context).colorScheme.background),
+      ),
       child: Icon(
         Icons.add,
         color: Theme.of(context).colorScheme.background,
@@ -66,9 +68,10 @@ class SearchBookButton extends StatelessWidget {
         Get.to(() => const SearchBook());
       },
       style: ElevatedButton.styleFrom(
-      shape: const CircleBorder(),
-      backgroundColor: const Color(0xffFF7315),
-      side: BorderSide(color:Theme.of(context).colorScheme.background),),
+        shape: const CircleBorder(),
+        backgroundColor: const Color(0xffFF7315),
+        side: BorderSide(color: Theme.of(context).colorScheme.background),
+      ),
       child: Icon(
         Icons.search,
         color: Theme.of(context).colorScheme.background,

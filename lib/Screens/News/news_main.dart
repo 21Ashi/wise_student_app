@@ -18,6 +18,7 @@ class News extends StatefulWidget {
 
 class _NewsState extends State<News> {
   List<QueryDocumentSnapshot> data = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _NewsState extends State<News> {
         await FirebaseFirestore.instance.collection('news').get();
     setState(() {
       data.addAll(querySnapshot.docs);
+      _isLoading = false;
     });
   }
 
@@ -108,23 +110,25 @@ class _NewsState extends State<News> {
                     ),
                   ],
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      final doc = data[index];
-                      return postCard(
-                        context,
-                        title: doc['title'],
-                        imagePath: doc['image'],
-                        description: doc['description'],
-                        createdAt: doc['created_at'],
-                        whoCanSee: doc['who_can_see'],
-                        author: doc['author'],
-                      );
-                    },
-                  ),
-                ),
+                _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : Expanded(
+                        child: ListView.builder(
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            final doc = data[index];
+                            return postCard(
+                              context,
+                              title: doc['title'],
+                              imagePath: doc['image'],
+                              description: doc['description'],
+                              createdAt: doc['created_at'],
+                              whoCanSee: doc['who_can_see'],
+                              author: doc['author'],
+                            );
+                          },
+                        ),
+                      ),
               ],
             ),
           ),

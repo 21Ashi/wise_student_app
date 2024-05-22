@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:wise_student_app/Screens/Library/cart_provider.dart';
+import 'package:wise_student_app/Screens/Library/shoppingcart.dart';
 import 'package:wise_student_app/Screens/LogIn/phone_number.dart';
 import 'package:wise_student_app/firebase/fire_messages.dart';
 import "package:wise_student_app/generated/l10n.dart";
@@ -40,21 +43,23 @@ void displayNotification(RemoteMessage message) async {
   );
 }
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseMessagesApi().initNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    // Handle incoming FCM message
-    // ignore: avoid_print
-    print("FCM Message Received: ${message.notification?.title}");
-    // Display notification
     displayNotification(message);
   });
-
+  Get.put(ShoppingCartController());
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+          child: const MyApp(),
+        ),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -69,7 +74,7 @@ mixin AppLocale {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key, Key? ke});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -77,6 +82,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FlutterLocalization _localization = FlutterLocalization.instance;
+  Locale? _locale;
+
   @override
   void initState() {
     _localization.init(mapLocales: [
@@ -87,27 +94,41 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  void _onTranslatedLanguage(Locale? locale) {
-    setState(() {});
+  void _onTranslatedLanguage(Locale? value) {
+    setState(() {
+      _locale = value!;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp();
-
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
+        builder: (context, child) {
+          return Directionality(
+            textDirection: _locale?.languageCode == 'ar'
+                ? TextDirection.rtl
+                : TextDirection.ltr,
+            child: child!,
+          );
+        },
         theme: Provider.of<ThemeProvider>(context).themeData,
-        darkTheme: darktheme,
-        home: const MainPage(title: ''),
+        debugShowCheckedModeBanner: false,
+        home: const MainPage(title: ''), // Use MainPage directly
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: S.delegate.supportedLocales,
-        locale: _localization.currentLocale);
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        locale: _locale);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Locale>('_locale', _locale));
+    properties.add(DiagnosticsProperty<Locale>('_locale', _locale));
   }
 }
 

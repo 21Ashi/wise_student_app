@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:provider/provider.dart';
+import 'package:wise_student_app/Screens/Library/cart_provider.dart';
 import 'package:wise_student_app/Screens/Library/shoppingcart.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 import 'package:wise_student_app/widget/Library/bottons.dart';
@@ -13,7 +17,17 @@ class BookDetails extends StatelessWidget {
   final String language;
   final String release;
   final String description;
-  const BookDetails({super.key, required this.category, required this.title, required this.imageAssetPath, required this.author,required this.pages,required this.language,required this.release, required this.description, });
+  const BookDetails({
+    super.key,
+    required this.category,
+    required this.title,
+    required this.imageAssetPath,
+    required this.author,
+    required this.pages,
+    required this.language,
+    required this.release,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,28 +42,31 @@ class BookDetails extends StatelessWidget {
         actions: const [
           Padding(
             padding: EdgeInsets.only(left: 16, right: 16),
-            child:ShoppingCartButton(),
+            child: ShoppingCartButton(),
           )
         ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            alignment: Alignment.topCenter,
-            image: AssetImage('assets/BookDetails.png'),
+      body: ChangeNotifierProvider(
+        create: (_) => CartProvider(),
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              alignment: Alignment.topCenter,
+              image: AssetImage('assets/BookDetails.png'),
+            ),
+          ),
+          child: YourBookContent(
+            category: category,
+            title: title,
+            imageAssetPath: imageAssetPath,
+            author: author,
+            pages: pages,
+            language: language,
+            release: release,
+            description: description,
           ),
         ),
-        child: YourBookContent(
-          category: category,
-          title: title,
-          imageAssetPath: imageAssetPath,
-          author: author,
-          pages: pages,
-          language: language,
-          release: release,
-          description:description,
-        ),
-      )
+      ),
     );
   }
 }
@@ -63,80 +80,121 @@ class YourBookContent extends StatelessWidget {
   final String language;
   final String release;
   final String description;
-  const YourBookContent({super.key, required this.category, required this.title, required this.imageAssetPath, required this.author, required this.pages, required this.language, required this.release, required this.description});
+  const YourBookContent({
+    super.key,
+    required this.category,
+    required this.title,
+    required this.imageAssetPath,
+    required this.author,
+    required this.pages,
+    required this.language,
+    required this.release,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 120,),
+        const SizedBox(
+          height: 120,
+        ),
         Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.background,
-            borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Container(
-                  height: 224,
-                  width: 179,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                height: 224,
+                width: 179,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
                       Color.fromARGB(255, 14, 74, 163),
-                      Color.fromARGB(255, 143, 200, 247)
-                      ]
-                    ),
-                    borderRadius: BorderRadius.circular(25)
+                      Color.fromARGB(255, 143, 200, 247),
+                    ],
                   ),
-                  padding: const EdgeInsets.all(20),
-                  child: Image.asset(
-                    imageAssetPath,
-                    fit: BoxFit.contain,
-                  ),
+                  borderRadius: BorderRadius.circular(25),
                 ),
-                const SizedBox(height: 10,),
-                Text(
-                  title,
-                  style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                padding: const EdgeInsets.all(20),
+                child: Image.asset(
+                  imageAssetPath,
+                  fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 10,),
-                CustomRowWithLines(
-                  firstValue: pages,
-                  firstLabel: S.of(context).BookPage,
-                  secondValue: language,
-                  secondLabel: S.of(context).BookLanguage,
-                  thirdValue: release,
-                  thirdLabel: S.of(context).BookRelease,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
                 ),
-                const SizedBox(height: 10,),
-                Text(
-                  description,
-                  style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.primary),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomRowWithLines(
+                firstValue: pages,
+                firstLabel: S.of(context).BookPage,
+                secondValue: language,
+                secondLabel: S.of(context).BookLanguage,
+                thirdValue: release,
+                thirdLabel: S.of(context).BookRelease,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                description,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
-              const SizedBox(height: 20,),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ShoppingCart(
-                        title: title,
-                        imageAssetPath: imageAssetPath,
-                        author: author,
-                        pages: pages,
-                        language: language,
-                        release: release,
-                        description: description,
-                      ),
+                  final shoppingCartController =
+                      Get.find<ShoppingCartController>();
+                  shoppingCartController.addToCart({
+                    'title': title,
+                    'imageAssetPath': imageAssetPath,
+                    'author': author,
+                    'pages': pages,
+                    'language': language,
+                    'release': release,
+                    'description': description,
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Item added to cart'),
+                      duration: Duration(seconds: 2),
                     ),
                   );
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    boxShadow: const [BoxShadow(offset: Offset(0, 3),blurRadius: 3,color: Colors.black38)],
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(0, 3),
+                        blurRadius: 3,
+                        color: Colors.black38,
+                      ),
+                    ],
                     color: Colors.orange[700],
-                    gradient: const LinearGradient(colors: [Color(0xffF9AD70), Color(0xffFF5717)]),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xffF9AD70), Color(0xffFF5717)],
+                    ),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   padding: const EdgeInsets.all(9),
@@ -154,10 +212,10 @@ class YourBookContent extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
-        )
+        ),
       ],
     );
   }
