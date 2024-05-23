@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wise_student_app/widget/ChatWidgets/Group/add_group.dart';
 import 'package:wise_student_app/widget/ChatWidgets/user_1.dart';
 import 'package:wise_student_app/widget/Library/library_textfield.dart';
 
@@ -180,6 +181,16 @@ Widget searchChatCard(
         title: Text(fname),
         subtitle: Text(stdemail),
       ),
+    ),
+  );
+}
+
+void _navigateToAddGroup(
+    BuildContext context, List<QueryDocumentSnapshot> data) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => AddGroup(data: data),
     ),
   );
 }

@@ -69,7 +69,9 @@ class _ChatprofileState extends State<Chatprofile>
                 width: MediaQuery.sizeOf(context).width * 0.24,
               ),
               const SearchButton(),
-              const AddGroup(),
+              const AddGroup(
+                data: [],
+              ),
             ],
           ),
         ),

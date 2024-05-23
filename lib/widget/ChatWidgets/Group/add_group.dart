@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wise_student_app/generated/l10n.dart';
+import 'package:wise_student_app/widget/ChatWidgets/gridview.dart';
+import 'package:wise_student_app/widget/ChatWidgets/row_items.dart';
 
 class AddGroup extends StatelessWidget {
-  const AddGroup({
-    super.key,
-  });
+  final List<QueryDocumentSnapshot> data;
 
+  const AddGroup({super.key, required this.data});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -44,30 +46,30 @@ class ImageSelectionBottomSheet extends StatefulWidget {
   const ImageSelectionBottomSheet({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _ImageSelectionBottomSheetState createState() =>
       _ImageSelectionBottomSheetState();
 }
 
 class _ImageSelectionBottomSheetState extends State<ImageSelectionBottomSheet> {
-  TextEditingController email = TextEditingController();
   late List<bool> selectedImages;
-  final List<String> imagePaths = [
-    'assets/friend1.png',
-    'assets/friend2.png',
-    'assets/friend3.png',
-    'assets/friend4.png',
-    'assets/friend5.png',
-    'assets/friend6.png',
-    'assets/friend7.png',
-    'assets/friend8.png',
-    'assets/friend9.png',
-  ];
+  List<DocumentSnapshot> usersData = [];
 
   @override
   void initState() {
     super.initState();
-    selectedImages = List.filled(imagePaths.length, false);
+    selectedImages = []; // Initialize selectedImages here
+    _fetchUsersData();
+  }
+
+  Future<void> _fetchUsersData() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('students').get();
+    setState(() {
+      usersData.addAll(querySnapshot.docs);
+      selectedImages = List.filled(
+          usersData.length, false); // Initialize selectedImages here as well
+      print(usersData);
+    });
   }
 
   @override
@@ -85,7 +87,7 @@ class _ImageSelectionBottomSheetState extends State<ImageSelectionBottomSheet> {
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
           ),
           Text(
-            S.of(context).MembersNumber,
+            '${usersData.length} Member',
             style: const TextStyle(
               color: Color(0xffFF5C1C),
               fontWeight: FontWeight.bold,
@@ -99,78 +101,45 @@ class _ImageSelectionBottomSheetState extends State<ImageSelectionBottomSheet> {
                 crossAxisCount: 3,
                 crossAxisSpacing: 10,
               ),
-              itemCount: imagePaths.length,
+              itemCount: usersData.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedImages[index] = !selectedImages[index];
-                        });
-                      },
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: ClipOval(
-                              child: ColorFiltered(
-                                colorFilter: selectedImages[index]
-                                    ? ColorFilter.mode(
-                                        Colors.black.withOpacity(0.7),
-                                        BlendMode.srcOver)
-                                    : const ColorFilter.mode(
-                                        Colors.transparent, BlendMode.srcOver),
-                                child: Image.asset(
-                                  imagePaths[index],
-                                  height: 85,
-                                  width: 85,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          if (selectedImages[index])
-                            const Align(
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 48,
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      '${S.of(context).SenderName} ${index + 1}',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 10),
-                    ),
-                  ],
+                var userData = usersData[index].data() as Map<String, dynamic>?;
+
+                // Add null check for userData
+                if (userData == null) {
+                  return const SizedBox(); // Or some placeholder widget
+                }
+
+                return GridCard(
+                  fname: userData['fname'] ?? '',
                 );
               },
             ),
           ),
           ElevatedButton(
             onPressed: () {},
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              shadowColor: MaterialStateProperty.all(Colors.transparent),
+              elevation: MaterialStateProperty.all(0),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
             child: Container(
               height: 40,
-              width: 280,
+              width: MediaQuery.sizeOf(context).width,
               decoration: BoxDecoration(
                 boxShadow: const [
                   BoxShadow(
-                      color: Colors.black38,
-                      offset: Offset(0, 2),
-                      blurRadius: 4)
+                    color: Colors.black38,
+                    offset: Offset(0, 2),
+                    blurRadius: 4,
+                  ),
                 ],
-                gradient: const LinearGradient(
-                  colors: [Color(0xffF9AD70), Color(0xffFF5717)],
-                ),
+                color: Colors.orange[700],
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(

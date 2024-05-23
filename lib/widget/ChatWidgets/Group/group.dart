@@ -14,7 +14,10 @@ class GroupButton extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const AddGroup()),
+          MaterialPageRoute(
+              builder: (context) => const AddGroup(
+                    data: [],
+                  )),
         );
       },
       child: Container(
@@ -169,7 +172,7 @@ class _GroupChatState extends State<GroupChat> {
                                   return groupChatCard(
                                     context: context,
                                     fname: data['fname'],
-                                    stdemail: data['std_email'],
+                                    std_email: data['std_email'],
                                     admin: Std(
                                       id: data['id'],
                                       fname: data['fname'],
@@ -206,13 +209,13 @@ class _GroupChatState extends State<GroupChat> {
   Widget groupChatCard({
     required BuildContext context,
     required String fname,
-    required String stdemail,
+    required String std_email,
     required Std admin,
   }) {
     return CheckboxListTile(
       checkboxShape: const CircleBorder(),
       title: Text(fname),
-      subtitle: Text(stdemail),
+      subtitle: Text(std_email),
       value: members.contains(admin.id),
       onChanged: (value) {
         if (value != null && value) {
