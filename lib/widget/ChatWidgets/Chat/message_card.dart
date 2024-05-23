@@ -69,6 +69,7 @@ class _MessageCardState extends State<MessageCard> {
     List<String> selectedMsgCopy = List.from(selectedMsg);
     await FireData().deleteMsg(widget.roomId, selectedMsgCopy);
 
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Selected messages deleted'),

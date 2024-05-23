@@ -93,9 +93,7 @@ class _FloatingButtonState extends State<FloatingButton> {
                           ),
                           child: Ink(
                             decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [Color(0xffF9AD70), Color(0xffFF5717)],
-                              ),
+                              color: Colors.orange[700],
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Container(
@@ -123,9 +121,15 @@ class _FloatingButtonState extends State<FloatingButton> {
               );
             },
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                      blurRadius: 2,
+                      offset: Offset(0, 2),
+                      color: Colors.black45)
+                ],
                 shape: BoxShape.circle,
-                color: Colors.red,
+                color: Colors.orange[700],
               ),
               padding: const EdgeInsets.all(15),
               child: const Icon(

@@ -15,20 +15,33 @@ class UserListItem extends StatefulWidget {
 class _UserListItemState extends State<UserListItem> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('ChatRooms')
           .where('members',
               arrayContains: FirebaseAuth.instance.currentUser!.uid)
           .snapshots(),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Something went wrong'),
+          );
+        } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return const Center(
+            child: Text('No chat rooms available'),
+          );
+        } else {
           List<ChatRoom> items = snapshot.data!.docs
-              .map((e) => ChatRoom.fromJson(e.data()))
+              .map((e) => ChatRoom.fromJson(e.data() as Map<String, dynamic>))
               .toList()
             ..sort(
               (a, b) => b.lastMessageTime!.compareTo(a.lastMessageTime!),
             );
+
           return ListView.builder(
             itemCount: items.length,
             itemBuilder: (context, index) {
@@ -46,10 +59,6 @@ class _UserListItemState extends State<UserListItem> {
                 item: items[index],
               );
             },
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
           );
         }
       },
