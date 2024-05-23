@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wise_student_app/Screens/Library/shoppingcart.dart';
+import 'package:wise_student_app/Screens/Notifications/noti_service.dart';
 
 class PurchaseConfirmationPage extends StatelessWidget {
   final List<Map<String, dynamic>> purchasedItems;
@@ -65,6 +66,8 @@ class PurchaseConfirmationPage extends StatelessWidget {
               ),
               onPressed: () {
                 // Replace with navigation to your home page or any other desired page
+                NotificationService().showNotification(
+                    title: 'Your Order', body: '$purchasedItems');
                 Navigator.pop(context);
                 Navigator.pop(context);
                 ShoppingCartController().clearCart();

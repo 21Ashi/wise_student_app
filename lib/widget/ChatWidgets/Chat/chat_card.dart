@@ -19,6 +19,23 @@ class ChatCard extends StatefulWidget {
 }
 
 class _ChatCardState extends State<ChatCard> {
+  Stream<DocumentSnapshot>? _stream;
+
+  @override
+  void initState() {
+    super.initState();
+    String? userId = widget.item.members?.firstWhere(
+      (element) => element != FirebaseAuth.instance.currentUser!.uid,
+      orElse: () => null,
+    );
+    if (userId != null) {
+      _stream = FirebaseFirestore.instance
+          .collection('students')
+          .doc(userId)
+          .snapshots();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String? userId = widget.item.members?.firstWhere(
@@ -26,7 +43,7 @@ class _ChatCardState extends State<ChatCard> {
       orElse: () => null,
     );
     return StreamBuilder(
-        stream: userId != null
+        stream: _stream != null
             ? FirebaseFirestore.instance
                 .collection('students')
                 .doc(userId)

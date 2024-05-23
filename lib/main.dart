@@ -42,8 +42,11 @@ void displayNotification(RemoteMessage message) async {
   );
 }
 
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initializeNotifications();
   await Firebase.initializeApp();
   await FirebaseMessagesApi().initNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -82,6 +85,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final FlutterLocalization _localization = FlutterLocalization.instance;
   Locale? _locale;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
@@ -91,6 +95,11 @@ class _MyAppState extends State<MyApp> {
     ], initLanguageCode: 'en');
     _localization.onTranslatedLanguage = _onTranslatedLanguage;
     super.initState();
+    _firebaseMessaging.requestPermission();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("onMessage: $message");
+      // Handle incoming messages here
+    });
   }
 
   void _onTranslatedLanguage(Locale? value) {
@@ -131,15 +140,58 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
-void initializeNotifications() {
+Future<void> initializeNotifications() async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
-  const InitializationSettings initializationSettings =
-      InitializationSettings(android: initializationSettingsAndroid);
-  flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+  final DarwinInitializationSettings initializationSettingsIOS =
+      DarwinInitializationSettings(
+    requestAlertPermission: true,
+    requestBadgePermission: true,
+    requestSoundPermission: true,
+    onDidReceiveLocalNotification:
+        (int id, String? title, String? body, String? payload) async {
+      // Handle received local notification, if needed
+    },
+  );
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOS,
+  );
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+  );
+}
+
+Future<void> showNotification() async {
+  const AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
+    'your_channel_id',
+    'Your channel name',
+    importance: Importance.max,
+    priority: Priority.high,
+    showWhen: false,
+  );
+
+  const NotificationDetails platformChannelSpecifics =
+      NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  await flutterLocalNotificationsPlugin.show(
+    0, // Notification ID
+    'New Notification',
+    'This is a test notification',
+    platformChannelSpecifics,
+    payload: 'screen_id', // Payload to identify the screen to navigate to
+  );
+}
+
+void onSelectNotification(String? payload) {
+  if (payload != null) {
+    print('Notification payload: $payload');
+    // Handle the notification payload, e.g., navigate to a specific screen
+  }
 }
 
 class MainPage extends StatefulWidget {
