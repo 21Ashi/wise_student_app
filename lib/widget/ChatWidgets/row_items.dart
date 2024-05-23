@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wise_student_app/widget/ChatWidgets/user_1.dart';
 
-Widget UserCard({
+Widget userCard({
   required BuildContext context,
   required String fname,
   required String email,
@@ -75,7 +75,7 @@ class RowChat extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var data = snapshots.data!.docs[index].data()
                       as Map<String, dynamic>;
-                  return UserCard(
+                  return userCard(
                     context: context,
                     fname: data['fname'],
                     email: data['std_email'],

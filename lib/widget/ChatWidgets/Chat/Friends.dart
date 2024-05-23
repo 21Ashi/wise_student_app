@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Freinds extends StatelessWidget {
-
   const Freinds({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

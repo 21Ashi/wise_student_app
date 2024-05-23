@@ -169,7 +169,7 @@ class _GroupChatState extends State<GroupChat> {
                                   return groupChatCard(
                                     context: context,
                                     fname: data['fname'],
-                                    std_email: data['std_email'],
+                                    stdemail: data['std_email'],
                                     admin: Std(
                                       id: data['id'],
                                       fname: data['fname'],
@@ -206,13 +206,13 @@ class _GroupChatState extends State<GroupChat> {
   Widget groupChatCard({
     required BuildContext context,
     required String fname,
-    required String std_email,
+    required String stdemail,
     required Std admin,
   }) {
     return CheckboxListTile(
       checkboxShape: const CircleBorder(),
       title: Text(fname),
-      subtitle: Text(std_email),
+      subtitle: Text(stdemail),
       value: members.contains(admin.id),
       onChanged: (value) {
         if (value != null && value) {

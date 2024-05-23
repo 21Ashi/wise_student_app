@@ -144,7 +144,7 @@ class _SearchChatState extends State<SearchChat> {
                                         return searchChatCard(
                                           context: context,
                                           fname: data['fname'],
-                                          std_email: data['std_email'],
+                                          stdemail: data['std_email'],
                                         );
                                       }
                                       return const SizedBox.shrink();
@@ -169,7 +169,7 @@ class _SearchChatState extends State<SearchChat> {
 Widget searchChatCard(
     {required BuildContext context,
     required String fname,
-    required String std_email}) {
+    required String stdemail}) {
   return GestureDetector(
     onTap: () {
       Get.to(() => const UserListItem());
@@ -178,7 +178,7 @@ Widget searchChatCard(
       child: ListTile(
         leading: Image.asset('assets/user1.png'),
         title: Text(fname),
-        subtitle: Text(std_email),
+        subtitle: Text(stdemail),
       ),
     ),
   );

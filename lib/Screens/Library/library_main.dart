@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 import 'package:wise_student_app/widget/Library/Contacts/art.dart';
@@ -90,10 +89,8 @@ class _YourContentWidgetState extends State<YourContentWidget> {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(right: 16),
-                child: ShoppingCartButton(),
-              ),
+              const ShoppingCartButton(),
+              const SearchBookButton(),
             ],
           ),
           Padding(

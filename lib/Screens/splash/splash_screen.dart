@@ -260,6 +260,7 @@ class _SplashScreenState extends State<SplashScreen2> {
         await Connectivity().checkConnectivity();
     if (connectivityResult != ConnectivityResult.wifi &&
         connectivityResult != ConnectivityResult.mobile) {
+      // ignore: use_build_context_synchronously
       showConnectionDialog(context);
     }
     Connectivity()

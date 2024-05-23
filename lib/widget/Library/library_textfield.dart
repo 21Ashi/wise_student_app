@@ -3,9 +3,11 @@ import 'package:wise_student_app/generated/l10n.dart';
 
 class LibraryTextField extends StatefulWidget {
   final Widget? suffix;
-  final ValueChanged<String>? onChanged; // Add onChanged parameter
+  final ValueChanged<String>? onChanged;
+  final void Function(String)? onSearch; // Add onSearch callback
 
-  const LibraryTextField({super.key, required this.suffix, this.onChanged});
+  const LibraryTextField(
+      {super.key, required this.suffix, this.onChanged, this.onSearch});
 
   @override
   State<LibraryTextField> createState() => _AnimatedTextFieldState2();
@@ -27,7 +29,17 @@ class _AnimatedTextFieldState2 extends State<LibraryTextField>
         color: const Color(0x99FF7315),
       ),
       child: TextField(
-        onChanged: widget.onChanged, // Pass onChanged to TextField
+        onChanged: (text) {
+          if (widget.onChanged != null) {
+            widget.onChanged!(text);
+          }
+          // Optionally, perform search after delay
+          _performSearch(text);
+        },
+        onSubmitted: (text) {
+          // Perform search when submitted
+          _performSearch(text);
+        },
         focusNode: focusNode,
         controller: _textEditingController,
         decoration: InputDecoration(
@@ -41,6 +53,12 @@ class _AnimatedTextFieldState2 extends State<LibraryTextField>
         ),
       ),
     );
+  }
+
+  void _performSearch(String searchText) {
+    if (widget.onSearch != null) {
+      widget.onSearch!(searchText);
+    }
   }
 
   @override

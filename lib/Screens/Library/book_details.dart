@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:wise_student_app/Screens/Library/cart_provider.dart';
 import 'package:wise_student_app/Screens/Library/shoppingcart.dart';
@@ -17,6 +16,7 @@ class BookDetails extends StatelessWidget {
   final String language;
   final String release;
   final String description;
+
   const BookDetails({
     super.key,
     required this.category,
@@ -166,21 +166,45 @@ class YourBookContent extends StatelessWidget {
                 onTap: () {
                   final shoppingCartController =
                       Get.find<ShoppingCartController>();
-                  shoppingCartController.addToCart({
-                    'title': title,
-                    'imageAssetPath': imageAssetPath,
-                    'author': author,
-                    'pages': pages,
-                    'language': language,
-                    'release': release,
-                    'description': description,
-                  });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Item added to cart'),
-                      duration: Duration(seconds: 2),
-                    ),
-                  );
+
+                  // Check if the book is already in the cart
+                  final alreadyInCart = shoppingCartController.books.any(
+                      (book) =>
+                          book['title'] == title &&
+                          book['author'] == author &&
+                          book['pages'] == pages &&
+                          book['language'] == language &&
+                          book['release'] == release &&
+                          book['description'] == description);
+
+                  if (!alreadyInCart) {
+                    // If the book is not in the cart, add it
+                    shoppingCartController.addToCart({
+                      'title': title,
+                      'imageAssetPath': imageAssetPath,
+                      'author': author,
+                      'pages': pages,
+                      'language': language,
+                      'release': release,
+                      'description': description,
+                    });
+
+                    // Show SnackBar or any other action you want
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Item added to cart'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else {
+                    // If the book is already in the cart, show a message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('You have already borrowed this book.'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -192,9 +216,6 @@ class YourBookContent extends StatelessWidget {
                       ),
                     ],
                     color: Colors.orange[700],
-                    gradient: const LinearGradient(
-                      colors: [Color(0xffF9AD70), Color(0xffFF5717)],
-                    ),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   padding: const EdgeInsets.all(9),

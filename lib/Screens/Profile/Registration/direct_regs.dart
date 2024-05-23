@@ -15,16 +15,6 @@ class DirectRegistration extends StatefulWidget {
 }
 
 class _DirectRegistrationState extends State<DirectRegistration> {
-  final List<List<bool>> _selectedRowsList =
-      List.generate(5, (index) => List.generate(5, (index) => false));
-
-  void _toggleRowSelection(int tableIndex, int rowIndex) {
-    setState(() {
-      _selectedRowsList[tableIndex][rowIndex] =
-          !_selectedRowsList[tableIndex][rowIndex];
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

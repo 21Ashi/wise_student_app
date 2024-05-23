@@ -6,7 +6,6 @@ import 'package:wise_student_app/widget/ChatWidgets/Group/add_group.dart';
 import 'package:wise_student_app/widget/ChatWidgets/Group/group_list_item.dart';
 import 'package:wise_student_app/widget/ChatWidgets/Chat/chat_text_tab.dart';
 import 'package:wise_student_app/widget/ChatWidgets/floating_bottom.dart';
-import 'package:wise_student_app/widget/ChatWidgets/Group/group.dart';
 import 'package:wise_student_app/widget/ChatWidgets/row_items.dart';
 import 'package:wise_student_app/widget/ChatWidgets/search_bar.dart';
 import 'package:wise_student_app/widget/ChatWidgets/user_1.dart';

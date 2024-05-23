@@ -11,7 +11,6 @@ import 'package:wise_student_app/firebase/fire_messages.dart';
 import "package:wise_student_app/generated/l10n.dart";
 import 'package:wise_student_app/Screens/onbloardscreen/onboard_main.dart';
 import 'package:wise_student_app/provider/provider_theme.dart';
-import 'package:wise_student_app/theme/dark_theme.dart';
 import 'package:wise_student_app/widget/News/scan_id.dart';
 import 'package:wise_student_app/widget/TextFields/new_text_field.dart';
 import 'package:flutter_localization/flutter_localization.dart';

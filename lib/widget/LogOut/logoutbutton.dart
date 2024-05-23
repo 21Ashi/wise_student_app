@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wise_student_app/Screens/Library/shoppingcart.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 import 'package:wise_student_app/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LogoutButton extends StatelessWidget {
-  const LogoutButton({super.key});
+  const LogoutButton({super.key, Key? skey});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +30,18 @@ class LogoutButton extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (context) {
-                    return const MainPage(title: '');
-                  }), (route) => false);
+                  // Clear the shopping cart when logging out
+                  ShoppingCartController.instance.clearCart();
+
+                  // Navigate to the login screen and remove all previous routes
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MainPage(
+                              title: '',
+                            )),
+                    (route) => false,
+                  );
                 },
                 child: Text(
                   S.of(context).LogoutButton,
