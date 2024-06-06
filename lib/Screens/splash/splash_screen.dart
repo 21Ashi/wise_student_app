@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wise_student_app/Screens/LogIn/phone_number.dart';
 import 'package:wise_student_app/Screens/onbloardscreen/onboard_main.dart';
@@ -23,6 +22,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
   final TextEditingController password = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool? isChecked = false;
+  bool _obscureText = true;
 
   @override
   void initState() {
@@ -38,8 +38,6 @@ class _SplashScreen2State extends State<SplashScreen2> {
       });
     });
   }
-
-  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +58,9 @@ class _SplashScreen2State extends State<SplashScreen2> {
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(isDarkMode
-                              ? "assets/topDT.png"
-                              : "assets/top.png"),
+                          image: AssetImage(
+                            isDarkMode ? "assets/topDT.png" : "assets/top.png",
+                          ),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -91,15 +89,14 @@ class _SplashScreen2State extends State<SplashScreen2> {
                             MainTextField(
                               controller: universityid,
                               hint: S.of(context).Uniemail,
-                              textInputType: TextInputType
-                                  .emailAddress, // Set input type to email address
+                              textInputType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your email address';
                                 }
-                                // Regular expression for email validation
-                                final emailRegex =
-                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                                final emailRegex = RegExp(
+                                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                                );
                                 if (!emailRegex.hasMatch(value)) {
                                   return 'Please enter a valid email address';
                                 }
@@ -131,7 +128,6 @@ class _SplashScreen2State extends State<SplashScreen2> {
                                 if (value.length < 5) {
                                   return 'Password must be at least 5 characters long';
                                 }
-
                                 return null;
                               },
                             ),
@@ -211,7 +207,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
                                                 'Incorrect password. Please try again.';
                                             break;
                                         }
-                                        // Show the error message on the screen
+                                        // ignore: use_build_context_synchronously
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(

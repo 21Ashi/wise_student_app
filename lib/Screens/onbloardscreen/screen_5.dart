@@ -21,7 +21,7 @@ class Screen5 extends StatelessWidget {
                 child: Image.asset('assets/support.png'),
               ),
               Text(
-                S.of(context).Support,
+                S.of(context).AcademicServices,
                 style: GoogleFonts.hammersmithOne(
                     fontSize: 32, color: Theme.of(context).colorScheme.primary),
               ),

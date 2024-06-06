@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AcademicAdvisor":
             MessageLookupByLibrary.simpleMessage("Academic Advisor"),
+        "AcademicServices":
+            MessageLookupByLibrary.simpleMessage("Academic Services"),
         "AddBook": MessageLookupByLibrary.simpleMessage("Add Book"),
         "Arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "Art": MessageLookupByLibrary.simpleMessage("Art"),
@@ -235,7 +237,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "SubjectsList": MessageLookupByLibrary.simpleMessage("Subjects List"),
         "Summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "Sunday": MessageLookupByLibrary.simpleMessage("Sunday"),
-        "Support": MessageLookupByLibrary.simpleMessage("Support"),
         "Sutarday": MessageLookupByLibrary.simpleMessage("Sutarday"),
         "TestBank": MessageLookupByLibrary.simpleMessage("Test Bank"),
         "Thereisnodisciplinary": MessageLookupByLibrary.simpleMessage(
@@ -280,10 +281,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your new password should be different\n from passwords previously used"),
         "UnderSavedPosts": MessageLookupByLibrary.simpleMessage(
             "Only you can see the posts you have saved"),
-        "UnderSupport1":
-            MessageLookupByLibrary.simpleMessage("Get Reliable Support"),
-        "UnderSupport2":
-            MessageLookupByLibrary.simpleMessage("With Our Application"),
+        "UnderSupport1": MessageLookupByLibrary.simpleMessage(
+            "Explore a range of academic services designed"),
+        "UnderSupport2": MessageLookupByLibrary.simpleMessage(
+            "to enhance your learning and support your educational journey"),
         "UnderTestBank1": MessageLookupByLibrary.simpleMessage(
             "We Also Have The Best Test Bank"),
         "UnderTestBank2":

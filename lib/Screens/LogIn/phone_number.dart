@@ -7,11 +7,31 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class Forgetpassword extends StatelessWidget {
-  const Forgetpassword({super.key, Key? ky});
+  const Forgetpassword({super.key});
 
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    TextEditingController phoneController = TextEditingController();
+
+    void validatePhoneNumber() {
+      String phoneNumber = phoneController.text;
+      // Perform validation logic here
+      if (phoneNumber.isNotEmpty && phoneNumber.length > 5) {
+        // If validation succeeds, navigate to Entercode screen
+        Get.to(() => const Entercode());
+      } else {
+        // If validation fails, show an error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Invalid phone number'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
 
     return GestureDetector(
       onTap: () {
@@ -26,14 +46,17 @@ class Forgetpassword extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                width: MediaQuery.sizeOf(context).width,
+                width: MediaQuery.of(context).size.width,
                 height: 630,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(isDarkMode
+                    image: AssetImage(
+                      isDarkMode
                           ? "assets/PnDT.png"
-                          : "assets/forgetpassword.png"),
-                      fit: BoxFit.fill),
+                          : "assets/forgetpassword.png",
+                    ),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               Center(
@@ -51,11 +74,12 @@ class Forgetpassword extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Text(
-                          textAlign: TextAlign.center,
                           S.of(context).UnderVerifaction,
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.karma(
-                              fontSize: 12,
-                              color: Theme.of(context).colorScheme.secondary),
+                            fontSize: 12,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
                         ),
                       ),
                       Padding(
@@ -64,16 +88,19 @@ class Forgetpassword extends StatelessWidget {
                         child: SizedBox(
                           height: 100,
                           child: IntlPhoneField(
+                            controller: phoneController,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide:
-                                      const BorderSide(color: Colors.blue)),
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    const BorderSide(color: Colors.blue),
+                              ),
                               labelText: S.of(context).PhoneNumber,
                               border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  borderSide: BorderSide()),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                borderSide: BorderSide(),
+                              ),
                             ),
                             initialCountryCode: 'JO',
                             onChanged: (phone) {
@@ -85,9 +112,8 @@ class Forgetpassword extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 100),
                         child: InkWell(
-                          onTap: () {
-                            Get.to(() => const Entercode());
-                          },
+                          onTap:
+                              validatePhoneNumber, // Call the validation function
                           child: Container(
                             width: 250,
                             height: 50,

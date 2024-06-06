@@ -45,7 +45,7 @@ class Onboard extends StatelessWidget {
             alignment: const Alignment(0, 0.8),
             child: InkWell(
               onTap: () {
-                Get.to(() => const NavBar(
+                Get.off(() => const NavBar(
                       initialIndex: 0,
                     ));
               },

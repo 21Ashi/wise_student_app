@@ -430,30 +430,30 @@ class S {
     );
   }
 
-  /// `Support`
-  String get Support {
+  /// `Academic Services`
+  String get AcademicServices {
     return Intl.message(
-      'Support',
-      name: 'Support',
+      'Academic Services',
+      name: 'AcademicServices',
       desc: '',
       args: [],
     );
   }
 
-  /// `Get Reliable Support`
+  /// `Explore a range of academic services designed`
   String get UnderSupport1 {
     return Intl.message(
-      'Get Reliable Support',
+      'Explore a range of academic services designed',
       name: 'UnderSupport1',
       desc: '',
       args: [],
     );
   }
 
-  /// `With Our Application`
+  /// `to enhance your learning and support your educational journey`
   String get UnderSupport2 {
     return Intl.message(
-      'With Our Application',
+      'to enhance your learning and support your educational journey',
       name: 'UnderSupport2',
       desc: '',
       args: [],
