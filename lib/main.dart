@@ -7,6 +7,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:wise_student_app/Screens/Library/cart_provider.dart';
 import 'package:wise_student_app/Screens/Library/shoppingcart.dart';
 import 'package:wise_student_app/Screens/LogIn/phone_number.dart';
+import 'package:wise_student_app/Screens/splash/splash_screen.dart';
 import "package:wise_student_app/generated/l10n.dart";
 import 'package:wise_student_app/Screens/onbloardscreen/onboard_main.dart';
 import 'package:wise_student_app/provider/provider_theme.dart';
@@ -116,7 +117,7 @@ class _MyAppState extends State<MyApp> {
         },
         theme: Provider.of<ThemeProvider>(context).themeData,
         debugShowCheckedModeBanner: false,
-        home: const MainPage(title: ''), // Use MainPage directly
+        home: const SplashScreen2(), // Use MainPage directly
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
