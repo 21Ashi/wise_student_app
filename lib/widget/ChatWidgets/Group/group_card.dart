@@ -39,24 +39,25 @@ class _GroupCardState extends State<GroupCard> {
               child: ListTile(
                 onTap: () {
                   Get.to(() => GroupPage(
-                        chatGroup: chatGroup,
-                        student: student,
-                        roomId: widget.item.id!,
-                        messageItem: Message(
-                            id: '',
-                            toId: '',
-                            fromId: '',
-                            msg: '',
-                            type: '',
-                            createdAt: '',
-                            read: '',
-                            message: ''),
-                      ));
+                    chatGroup: chatGroup,
+                    student: student,
+                    groupId: widget.item.id!,
+                    messageItem: Message(
+                      id: '',
+                      toId: '',
+                      fromId: '',
+                      msg: '',
+                      type: '',
+                      createdAt: '',
+                      read: '',
+                      message: ''
+                    ),
+                  ));
                 },
                 leading: const CircleAvatar(
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Colors.green,
                   radius: 25,
-                  backgroundImage: AssetImage('assets/young women with coffee and notebooks.png'),
+                  backgroundImage: AssetImage('assets/group of young people discussing work issues.png'),
                 ),
                 title: Text(
                   widget.item.name!,
@@ -98,14 +99,14 @@ class _GroupCardState extends State<GroupCard> {
                             )
                           : Text(widget.item.lastMessageTime.toString());
                     } else {
-                      return const CircularProgressIndicator(); // Handle loading state
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
               ),
             );
           } else {
-            return Container(); // Handle case where data doesn't exist or snapshot is null
+            return Container();
           }
         });
   }

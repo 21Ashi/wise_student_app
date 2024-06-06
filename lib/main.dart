@@ -7,7 +7,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:wise_student_app/Screens/Library/cart_provider.dart';
 import 'package:wise_student_app/Screens/Library/shoppingcart.dart';
 import 'package:wise_student_app/Screens/LogIn/phone_number.dart';
-import 'package:wise_student_app/firebase/fire_messages.dart';
 import "package:wise_student_app/generated/l10n.dart";
 import 'package:wise_student_app/Screens/onbloardscreen/onboard_main.dart';
 import 'package:wise_student_app/provider/provider_theme.dart';
@@ -48,10 +47,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeNotifications();
   await Firebase.initializeApp();
-  await FirebaseMessagesApi().initNotifications();
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    displayNotification(message);
-  });
+
   Get.put(ShoppingCartController());
   runApp(
     MultiProvider(
@@ -97,7 +93,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _firebaseMessaging.requestPermission();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("onMessage: $message");
       // Handle incoming messages here
     });
   }
@@ -189,7 +184,6 @@ Future<void> showNotification() async {
 
 void onSelectNotification(String? payload) {
   if (payload != null) {
-    print('Notification payload: $payload');
     // Handle the notification payload, e.g., navigate to a specific screen
   }
 }

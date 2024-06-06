@@ -209,6 +209,7 @@ class _GroupChatState extends State<GroupChat> {
   Widget groupChatCard({
     required BuildContext context,
     required String fname,
+    // ignore: non_constant_identifier_names
     required String std_email,
     required Std admin,
   }) {

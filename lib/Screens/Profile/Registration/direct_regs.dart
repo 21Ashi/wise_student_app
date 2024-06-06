@@ -61,7 +61,7 @@ class _DirectRegistrationState extends State<DirectRegistration> {
             const ElectiveUniversityC(),
             const SizedBox(
               height: 20,
-            )
+            ),
           ],
         ),
       ),

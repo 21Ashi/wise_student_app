@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wise_student_app/generated/l10n.dart';
 import 'package:wise_student_app/widget/ChatWidgets/gridview.dart';
-import 'package:wise_student_app/widget/ChatWidgets/row_items.dart';
 
 class AddGroup extends StatelessWidget {
   final List<QueryDocumentSnapshot> data;
@@ -46,6 +45,7 @@ class ImageSelectionBottomSheet extends StatefulWidget {
   const ImageSelectionBottomSheet({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ImageSelectionBottomSheetState createState() =>
       _ImageSelectionBottomSheetState();
 }
@@ -68,7 +68,6 @@ class _ImageSelectionBottomSheetState extends State<ImageSelectionBottomSheet> {
       usersData.addAll(querySnapshot.docs);
       selectedImages = List.filled(
           usersData.length, false); // Initialize selectedImages here as well
-      print(usersData);
     });
   }
 

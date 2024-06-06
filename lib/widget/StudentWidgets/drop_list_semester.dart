@@ -89,7 +89,6 @@ class _DroplistSemesterState extends State<DroplistSemester> {
           ),
           const NameIdContainer(),
           const SizedBox(height: 20),
-          if (selectedTable != null) selectedTable!,
         ],
       ),
     );

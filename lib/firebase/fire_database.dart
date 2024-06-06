@@ -192,4 +192,29 @@ class FireData {
     String imageUrl = await (await uploadTask).ref.getDownloadURL();
     return imageUrl;
   }
+
+  Future sendGroupMessage(String msg, String groupId, {String? type}) async {
+    String msgId = const Uuid().v1();
+    Message message = Message(
+        id: msgId,
+        toId: '',
+        fromId: myUid,
+        msg: msg,
+        type: type ?? 'text',
+        createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
+        read: '',
+        message: '');
+
+    await firestore
+        .collection('groups')
+        .doc(groupId)
+        .collection('messages')
+        .doc(msgId)
+        .set(message.toJson());
+
+    firestore.collection('groups').doc(groupId).update({
+      'last_message': msg,
+      'last_message_time': DateTime.now().millisecondsSinceEpoch.toString(),
+    });
+  }
 }
