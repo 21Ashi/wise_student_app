@@ -39,25 +39,23 @@ class _GroupCardState extends State<GroupCard> {
               child: ListTile(
                 onTap: () {
                   Get.to(() => GroupPage(
-                    chatGroup: chatGroup,
-                    student: student,
-                    groupId: widget.item.id!,
-                    messageItem: Message(
-                      id: '',
-                      toId: '',
-                      fromId: '',
-                      msg: '',
-                      type: '',
-                      createdAt: '',
-                      read: '',
-                      message: ''
-                    ),
-                  ));
+                        chatGroup: chatGroup,
+                        student: student,
+                        groupId: widget.item.id!,
+                        messageItem: Message(
+                            id: '',
+                            toId: '',
+                            fromId: '',
+                            msg: '',
+                            type: '',
+                            createdAt: '',
+                            read: '',
+                            message: ''),
+                      ));
                 },
                 leading: const CircleAvatar(
                   backgroundColor: Colors.green,
                   radius: 25,
-                  backgroundImage: AssetImage('assets/group of young people discussing work issues.png'),
                 ),
                 title: Text(
                   widget.item.name!,
@@ -68,8 +66,8 @@ class _GroupCardState extends State<GroupCard> {
                 ),
                 subtitle: Text(
                   widget.item.lastMessage! == ""
-                    ? "send first message"
-                    : widget.item.lastMessage!,
+                      ? "send first message"
+                      : widget.item.lastMessage!,
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 14,
@@ -84,8 +82,7 @@ class _GroupCardState extends State<GroupCard> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       final unReadList = snapshot.data!.docs
-                          .map((e) =>
-                              Message.fromJson(e.data()))
+                          .map((e) => Message.fromJson(e.data()))
                           .where((element) => element.read == "")
                           .where((element) =>
                               element.fromId !=
@@ -110,4 +107,4 @@ class _GroupCardState extends State<GroupCard> {
           }
         });
   }
-  }
+}

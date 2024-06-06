@@ -38,8 +38,6 @@ class GroupPage extends StatelessWidget {
                 const CircleAvatar(
                   backgroundColor: Colors.green,
                   radius: 25,
-                  backgroundImage: AssetImage(
-                      'assets/group of young people discussing work issues.png'),
                 ),
                 const SizedBox(width: 10),
                 Column(
